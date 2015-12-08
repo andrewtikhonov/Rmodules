@@ -76,8 +76,16 @@ abstract class AbstractAnalysisJob {
     }
 
     private void setupTemporaryDirectory() {
+
+        /* make sure directories are writablei */
+        File f0 = new File(topTemporaryDirectory, name)
+        f0.mkdirs()
+        f0.setWritable(true, false)
+
+        /* this one as well */
         temporaryDirectory = new File(new File(topTemporaryDirectory, name), 'workingDirectory')
         temporaryDirectory.mkdirs()
+        temporaryDirectory.setWritable(true, false)
     }
 
     abstract protected getForwardPath()
